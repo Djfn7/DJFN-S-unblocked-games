@@ -1,5 +1,5 @@
 {
-  "name": "Unblocked Games Hub",
+  "name": "DJFN'S Unblocked proxy",
   "description": "A simple collection of unblocked games playable via iframes.",
-  "requestFramePermissions": []
+  "requestFramePermissions": ["camera", "microphone", "geolocation"]
 }
