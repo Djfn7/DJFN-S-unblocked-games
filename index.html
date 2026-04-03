@@ -101,18 +101,36 @@
             </div>
         </div>
         <div class="flex-1 bg-zinc-950 relative">
-            <iframe id="game-iframe" class="w-full h-full border-none" allow="autoplay; fullscreen; keyboard"></iframe>
+            <iframe 
+                id="game-iframe" 
+                class="w-full h-full border-none" 
+                allow="accelerometer *; ambient-light-sensor *; autoplay *; clipboard-read *; clipboard-write *; encrypted-media *; fullscreen *; geolocation *; gyroscope *; local-network-access *; magnetometer *; midi *; payment *; picture-in-picture *; screen-wake-lock *; speaker *; sync-xhr *; vibrate *; vr *; web-share *; gamepad *; microphone *" 
+                sandbox="allow-downloads allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation allow-storage-access-by-user-activation allow-orientation-lock allow-pointer-lock allow-presentation"
+                title="Game Player"
+            ></iframe>
         </div>
     </div>
 
     <script>
         const games = [
-            { id: "2048", title: "2048", url: "https://play2048.co/", thumbnail: "https://picsum.photos/seed/2048/400/300" },
-            { id: "tetris", title: "Tetris", url: "https://tetris.com/play-tetris", thumbnail: "https://picsum.photos/seed/tetris/400/300" },
-            { id: "flappy-bird", title: "Flappy Bird Clone", url: "https://wayou.github.io/FlappyBird/", thumbnail: "https://picsum.photos/seed/flappy/400/300" },
-            { id: "snake", title: "Snake", url: "https://poki.com/en/g/snake-is-mlg", thumbnail: "https://picsum.photos/seed/snake/400/300" },
-            { id: "pacman", title: "Pacman", url: "https://www.google.com/logos/2010/pacman10-i.html", thumbnail: "https://picsum.photos/seed/pacman/400/300" },
-            { id: "dino", title: "Chrome Dino", url: "https://chromedino.com/", thumbnail: "https://picsum.photos/seed/dino/400/300" }
+            { 
+                id: "google-script-game", 
+                title: "Google Script Game", 
+                url: "https://n-finrlwelu2m5st2oq2etipr2kly2skj3gwmb3rq-0lu-script.googleusercontent.com/userCodeAppPanel", 
+                thumbnail: "https://picsum.photos/seed/googlegame/400/300" 
+            },
+            {
+                id: "fight-arena-online",
+                title: "Fight Arena Online",
+                url: "https://fight-arena-online.game-files.crazygames.com/unity/unity2020/fight-arena-online.html?skipPrerollFirstSession=true&v=1.354",
+                thumbnail: "https://picsum.photos/seed/fightarena/400/300"
+            },
+            {
+                id: "space-waves",
+                title: "Space Waves",
+                url: "https://space-waves.game-files.crazygames.com/unity/unity2020/space-waves.html?skipPrerollFirstSession=true&v=1.354",
+                thumbnail: "https://picsum.photos/seed/spacewaves/400/300"
+            }
         ];
 
         const gamesGrid = document.getElementById('games-grid');
