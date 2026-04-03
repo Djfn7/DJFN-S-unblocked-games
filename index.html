@@ -99,19 +99,76 @@
         </div>
     </header>
 
+    <!-- Tab Navigation -->
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
+        <div class="flex gap-2 p-1 bg-zinc-900/50 rounded-xl border border-zinc-800 w-fit">
+            <button id="tab-games" class="px-6 py-2 rounded-lg text-sm font-medium transition-all bg-indigo-600 text-white shadow-lg">
+                Games
+            </button>
+            <button id="tab-browser" class="px-6 py-2 rounded-lg text-sm font-medium transition-all text-zinc-400 hover:text-white hover:bg-zinc-800">
+                Browser
+            </button>
+        </div>
+    </nav>
+
     <!-- Main Content -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div class="mb-8">
-            <h2 class="text-3xl font-bold mb-2">Popular Games</h2>
-            <p class="text-zinc-400">Play the best unblocked games directly in your browser.</p>
+        <!-- Games Section -->
+        <div id="games-section">
+            <div class="mb-8">
+                <h2 class="text-3xl font-bold mb-2">Popular Games</h2>
+                <p class="text-zinc-400">Play the best unblocked games directly in your browser.</p>
+            </div>
+
+            <div id="games-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <!-- Games will be injected here -->
+            </div>
+
+            <div id="no-results" class="hidden text-center py-20">
+                <p class="text-zinc-500 text-lg">No games found matching "<span id="query-text"></span>"</p>
+            </div>
         </div>
 
-        <div id="games-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            <!-- Games will be injected here -->
-        </div>
-
-        <div id="no-results" class="hidden text-center py-20">
-            <p class="text-zinc-500 text-lg">No games found matching "<span id="query-text"></span>"</p>
+        <!-- Browser Section -->
+        <div id="browser-section" class="hidden h-[70vh] flex flex-col gap-4">
+            <div class="bg-zinc-900 p-4 rounded-2xl border border-zinc-800 flex flex-col gap-4 shadow-xl">
+                <div class="flex items-center gap-3">
+                    <div class="flex-1 relative">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500"><circle cx="12" cy="12" r="10"/><line x1="2" x2="22" y1="12" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                        <input 
+                            type="text" 
+                            id="main-browser-input" 
+                            placeholder="Enter URL to browse (e.g., bing.com)" 
+                            class="w-full bg-zinc-950 border border-zinc-800 rounded-xl py-3 pl-12 pr-4 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all text-white"
+                        >
+                    </div>
+                    <button id="main-browser-go" class="bg-indigo-600 hover:bg-indigo-500 text-white px-8 py-3 rounded-xl font-bold transition-all shadow-lg shadow-indigo-600/20 active:scale-95">
+                        Browse
+                    </button>
+                </div>
+                <div class="flex flex-wrap gap-2 items-center">
+                    <span class="text-xs text-zinc-500 mr-2 uppercase tracking-widest font-bold">Quick Links:</span>
+                    <button onclick="loadMainBrowser('https://www.bing.com')" class="px-3 py-1.5 bg-zinc-800 hover:bg-zinc-700 rounded-lg text-xs transition-colors">Bing</button>
+                    <button onclick="loadMainBrowser('https://duckduckgo.com')" class="px-3 py-1.5 bg-zinc-800 hover:bg-zinc-700 rounded-lg text-xs transition-colors">DuckDuckGo</button>
+                    <button onclick="loadMainBrowser('https://www.wikipedia.org')" class="px-3 py-1.5 bg-zinc-800 hover:bg-zinc-700 rounded-lg text-xs transition-colors">Wikipedia</button>
+                    <button onclick="loadMainBrowser('https://archive.org')" class="px-3 py-1.5 bg-zinc-800 hover:bg-zinc-700 rounded-lg text-xs transition-colors">Wayback Machine</button>
+                </div>
+            </div>
+            <div class="flex-1 bg-zinc-900 rounded-2xl border border-zinc-800 overflow-hidden relative shadow-2xl">
+                <iframe 
+                    id="main-browser-iframe" 
+                    class="w-full h-full border-none bg-white" 
+                    allow="accelerometer *; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"
+                    sandbox="allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation"
+                ></iframe>
+                <div id="browser-placeholder" class="absolute inset-0 flex flex-col items-center justify-center bg-zinc-900 text-zinc-500 p-8 text-center">
+                    <div class="bg-zinc-800 p-6 rounded-full mb-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" x2="22" y1="12" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-zinc-300 mb-2">Ready to Browse</h3>
+                    <p class="max-w-md text-sm">Enter a URL above to start browsing. Note that some sites (like Google/YouTube) may block iframe access.</p>
+                </div>
+            </div>
         </div>
     </main>
 
@@ -172,6 +229,48 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>
+        const tabGames = document.getElementById('tab-games');
+        const tabBrowser = document.getElementById('tab-browser');
+        const gamesSection = document.getElementById('games-section');
+        const browserSection = document.getElementById('browser-section');
+        const mainBrowserInput = document.getElementById('main-browser-input');
+        const mainBrowserGo = document.getElementById('main-browser-go');
+        const mainBrowserIframe = document.getElementById('main-browser-iframe');
+        const browserPlaceholder = document.getElementById('browser-placeholder');
+
+        // Tab Switching Logic
+        tabGames.onclick = () => {
+            tabGames.className = "px-6 py-2 rounded-lg text-sm font-medium transition-all bg-indigo-600 text-white shadow-lg";
+            tabBrowser.className = "px-6 py-2 rounded-lg text-sm font-medium transition-all text-zinc-400 hover:text-white hover:bg-zinc-800";
+            gamesSection.classList.remove('hidden');
+            browserSection.classList.add('hidden');
+        };
+
+        tabBrowser.onclick = () => {
+            tabBrowser.className = "px-6 py-2 rounded-lg text-sm font-medium transition-all bg-indigo-600 text-white shadow-lg";
+            tabGames.className = "px-6 py-2 rounded-lg text-sm font-medium transition-all text-zinc-400 hover:text-white hover:bg-zinc-800";
+            browserSection.classList.remove('hidden');
+            gamesSection.classList.add('hidden');
+        };
+
+        function loadMainBrowser(url) {
+            if (!url.startsWith('http://') && !url.startsWith('https://')) {
+                url = 'https://' + url;
+            }
+            mainBrowserInput.value = url;
+            mainBrowserIframe.src = url;
+            browserPlaceholder.style.display = 'none';
+        }
+
+        mainBrowserGo.onclick = () => {
+            const url = mainBrowserInput.value.trim();
+            if (url) loadMainBrowser(url);
+        };
+
+        mainBrowserInput.onkeydown = (e) => {
+            if (e.key === 'Enter') mainBrowserGo.click();
+        };
+
         const games = [
             { 
                 id: "url-browser", 
